@@ -1,0 +1,35 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}
+    Books
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- Page Heading -->
+      <h1 class="my-4">All books
+        <small>at one place.</small>
+      </h1>
+
+      <!-- list -->
+    {% for book in books %}
+      <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x200" alt="">
+          </a>
+        </div>
+        <div class="col-md-13">
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.summary }}</p>
+          <b><p>{{ book.author }}</p></b>
+          <a class="btn btn-primary" href="#">View copies</a>
+        </div>
+
+      </div>
+      <!-- /.row -->
+      <hr>
+    {% endfor %}
+
+{% endblock %}
