@@ -1,0 +1,76 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}
+    {{ book.name }}
+{% endblock %}
+
+{% block content %}
+
+<!--    book data-->
+    <div class="col-13 mt-4 mb-4">
+        <h1>{{ book.title }}</h1>
+        <table class="table">
+        <tr>
+            <th scope="col">Author</th>
+            <td>{{ book.author }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Summary</th>
+            <td>{{ book.summary }}</td>
+        </tr>
+        <tr>
+            <th scope="col">ISBN</th>
+            <td>{{ book.isbn }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Language</th>
+            <td>{{ book.language }}</td>
+        </tr>
+        <tr>
+            <th scope="col">Genre</th>
+            <td>{{ book.genre.all|join:',' }}</td>
+        </tr>
+        </table>
+    </div>
+
+    {% if book.bookinstance_set.count > 0 %}
+
+<!--    book instance-->
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Imprint</th>
+            <th scope="col">status</th>
+            <th scope="col">Due back</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for bookObj in book.bookinstance_set.all %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ bookObj.imprint }}</td>
+
+          {% if bookObj.status == 'm' %}
+            <td>Maintenance</td>
+          {% elif bookObj.status == 'o' %}
+            <td>On loan</td>
+          {% elif bookObj.status == 'a' %}
+            <td>Available</td>
+          {% elif bookObj.status == 'r' %}
+            <td>Reserved</td>
+          {% endif %}
+
+          <td>{{ bookObj.due_back }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    {% else %}
+
+    <h1 class="ml-auto mr-auto mt-4 mb-4 text-warning">Books aren't available yet</h1>
+
+    {% endif %}
+
+{% endblock %}

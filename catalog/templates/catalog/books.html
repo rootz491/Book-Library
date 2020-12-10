@@ -12,24 +12,55 @@
         <small>at one place.</small>
       </h1>
 
+
       <!-- list -->
+    <div class="row">
     {% for book in books %}
-      <div class="row">
-        <div class="col-md-7">
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x200" alt="">
-          </a>
-        </div>
-        <div class="col-md-13">
-          <h3>{{ book.title }}</h3>
-          <p>{{ book.summary }}</p>
-          <b><p>{{ book.author }}</p></b>
-          <a class="btn btn-primary" href="#">View copies</a>
-        </div>
-
-      </div>
+<!--      <div class="row">-->
+<!--        <div class="col-md-7">-->
+<!--          <a href="#">-->
+<!--            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x200" alt="">-->
+<!--          </a>-->
+<!--        </div>-->
+<!--        <div class="col-md-13">-->
+<!--          <h3>{{ book.title }}</h3>-->
+<!--          <p>{{ book.summary }}</p>-->
+<!--          <b><p>{{ book.author }}</p></b>-->
+<!--          <a class="btn btn-primary" href="{{ book.get_absolute_url }}">View copies</a>-->
+<!--        </div>-->
+<!--      </div>-->
       <!-- /.row -->
-      <hr>
-    {% endfor %}
 
+
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="card h-100">
+              <div class="card-body">
+                  <div class="card-body">
+                    <h2 class="card-title">{{ book.title }}</h2>
+                    <p class="card-text">{{ book.summary }}</p>
+                    <b><p class="card-text">{{ book.author }}</p></b>
+                  </div>
+              </div>
+              <div class="card-footer">
+                  <a href="{{ book.get_absolute_url }}" class="btn btn-primary btn-sm">details</a>
+              </div>
+          </div>
+        </div>
+
+
+<!--        <div class="col-md-4 mb-5">-->
+<!--            <div class="card h-100">-->
+<!--              <div class="card-body">-->
+<!--                <h2 class="card-title">{{ book.title }}</h2>-->
+<!--                <p class="card-text">{{ book.summary }}</p>-->
+<!--                <b><p class="card-text">{{ book.author }}</p></b>-->
+<!--              </div>-->
+<!--              <div class="card-footer">-->
+<!--                <a href="{{ book.get_absolute_url }}" class="btn btn-primary btn-sm">details</a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--      <hr>-->
+    {% endfor %}
+    </div>
 {% endblock %}

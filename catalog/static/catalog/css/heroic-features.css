@@ -5,3 +5,7 @@ body {
 #logo {
     width: 100px;
 }
+
+.long-height {
+    min-height: 73.2vh;
+}

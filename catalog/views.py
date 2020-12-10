@@ -1,20 +1,63 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Book
+from django.views import generic
+from .models import Book, BookInstance
+
 # Create your views here.
 
 
-def index(request):
-    obj = Book.objects.all()[:3]
-    context = {
-        'books': obj,
-    }
-    return render(request, 'catalog/index.html', context)
+'''     basic generic class view
+
+class SomeView(generic.DetailView):
+    model = Book
+    context_object_name = 'books'   # context variable name
+    template_name = 'catalog/details.html'  # custom template name  (default: 'model_detail.html')
+    queryset = Book.objects.filter(author='abc')    # customise content variable
+
+    # another way to modify data before sending.  (can do the same with queryset variable as above)
+    def get_queryset(self):
+        return Book.objects
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(BookListView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['some_data'] = 'This is just some data'
+        return context
+'''
 
 
-def books(request):
-    obj = Book.objects.all()
-    context = {
-        'books': obj,
-    }
-    return render(request, 'catalog/books.html', context)
+
+
+class IndexView(generic.ListView):
+    model = Book
+    template_name = 'catalog/index.html'
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        return Book.objects.all()[:3]
+
+
+
+
+
+class BookListView(generic.ListView):
+    model = Book
+    template_name = 'catalog/books.html'
+    context_object_name = 'books'
+
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = 'catalog/detail_book.html'
+
+
+
+
+
+
+
+
+
+
