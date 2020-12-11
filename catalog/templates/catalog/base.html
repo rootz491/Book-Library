@@ -18,6 +18,8 @@
   {% load static %}
   <link href="{% static 'catalog/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'catalog/css/heroic-features.css' %}" rel="stylesheet">
+  {% block staticFiles %}
+  {% endblock %}
 
 </head>
 
@@ -32,20 +34,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'catalog:index' %}">Home
-<!--              <span class="sr-only">(current)</span>-->
-            </a>
+            <a class="nav-link" href="{% url 'catalog:index' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'catalog:books' %}">books</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="{% url 'logout' %}">logout</a>
           </li>
+        {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="{% url 'login' %}">log in</a>
           </li>
+        {% endif %}
         </ul>
       </div>
     </div>

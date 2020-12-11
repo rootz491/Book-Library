@@ -1,0 +1,48 @@
+{% extends "catalog/base.html" %}
+
+
+{% block staticFiles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'registration/login.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+
+  <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <form action="{% url 'login' %}" method="post" class="form-signin">
+              {% csrf_token %}
+              <div class="form-label-group">
+                  <label for="id_username">Username</label>
+                  <input class="form-control" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+              </div>
+              <div class="form-label-group">
+                  <label for="id_password">Password</label>
+                  <input class="form-control" type="password" name="password" autocomplete="current-password" required id="id_password">
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+            </form>
+          </div>
+        </div>
+          {% if form.errors %}
+                    <p>Your username and password didn't match. Please try again.</p>
+                  {% endif %}
+
+                  {% if next %}
+                    {% if user.is_authenticated %}
+                      <p>Your account doesn't have access to this page. To proceed,
+                      please login with an account that has access.</p>
+                    {% else %}
+                      <p>Please login to see this page.</p>
+                    {% endif %}
+                  {% endif %}
+      </div>
+
+    </div>
+
+{% endblock %}

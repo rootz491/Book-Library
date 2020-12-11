@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
 from .models import Book, BookInstance
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -29,7 +30,8 @@ class SomeView(generic.DetailView):
 
 
 
-class IndexView(generic.ListView):
+class IndexView(LoginRequiredMixin, generic.ListView,):
+    login_url = 'login'
     model = Book
     template_name = 'catalog/index.html'
     context_object_name = 'books'
@@ -41,14 +43,16 @@ class IndexView(generic.ListView):
 
 
 
-class BookListView(generic.ListView):
+class BookListView(LoginRequiredMixin, generic.ListView):
+    login_url = 'login'
     model = Book
     template_name = 'catalog/books.html'
     context_object_name = 'books'
 
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(LoginRequiredMixin, generic.DetailView):
+    login_url = 'login'
     model = Book
     template_name = 'catalog/detail_book.html'
 

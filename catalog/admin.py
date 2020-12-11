@@ -30,7 +30,7 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('book', 'id', 'status', 'due_back')     # display this data in unique columns
+    list_display = ('book', 'id', 'status', 'due_back', 'borrower')     # display this data in unique columns
     list_filter = ('status', 'due_back')                    # to add filter on the right-side of book
 
     fieldsets = (           # to group certain fields under specific heading in input form.
@@ -38,7 +38,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
             'fields': ('book', 'imprint', 'id')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back')
+            'fields': ('status', 'due_back', 'borrower')
         }),
     )
 
