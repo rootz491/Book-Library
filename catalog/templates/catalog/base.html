@@ -36,10 +36,16 @@
         <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
           <li class="nav-item">
+            <p class="nav-link text-white">welcome, {{ user.username }}</p>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'catalog:index' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'catalog:books' %}">books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'catalog:borrowed' %}">my book</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">logout</a>

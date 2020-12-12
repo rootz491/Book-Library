@@ -1,0 +1,37 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+
+    <h1 class="my-4">Borrowed Books</h1>
+
+    {% if bookinstance_list %}
+      {% for bookinst in bookinstance_list %}
+
+      <div class="row p-2 {% if bookinst.is_overdue %}text-danger{% endif %}">
+        <div class="col-13">
+          <h3>{{ bookinst.book.title }}</h3>
+          <p>({{ bookinst.due_back }})</p>
+          <div class="d-flex">
+            <a class="btn btn-primary mr-5" href="{% url 'catalog:detail' bookinst.book.pk %}">book detail</a>
+              {% if perms.catalog.can_mark_returned %}
+            <a class="btn btn-primary" href="{% url 'catalog:renew' bookinst.pk %}">Renew</a>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      {% endfor %}
+
+    {% else %}
+
+      <div class="row">
+        <div class="col-13">
+          <h3>There are no books borrowed</h3>
+        </div>
+      </div>
+      <hr>
+
+    {% endif %}
+
+{% endblock %}
