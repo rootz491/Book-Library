@@ -18,9 +18,9 @@ to get out of virtual env:  deactivate
 
 * templates remaining (Bootstrap can be a good option)  **[DONE]**
 
-* Views.py      
+* Views.py      **[DONE]**
 
-* urls.py       
+* urls.py       **[DONE]**
 
 
 # new things from this project
@@ -73,3 +73,48 @@ to get out of virtual env:  deactivate
                 <!-- Perhaps add code to link to specific function from view, here. -->
             {% endif %}
             ```
+    *   __SESSION__ are also very useful to work with user specific things like recent searches or
+        theme color when last used website. However i didn't implemented/used it in this project.
+
+
+#   Deployment
+
+*   read [this](https://medium.com/@shashankmohabia/deploying-a-django-app-to-heroku-using-github-repository-319c04a11c1a) article
+    
+    *   change __settings.py__ accordingly!
+
+*   create these files:
+    
+    *   Procfile
+    *   Procfile.windows
+    *   requirements.txt
+    *   runtime.txt
+    
+*   heroku CLI
+
+    ```shell script
+    heroku create <app-name>
+    git remote -v
+    git add .
+    git commit -m "those extra files for heroku"
+    git push -u origin master
+    ```
+    *   Now go to: heroku site > current application > settings > add __BUILD PACK__ > choose **python**
+    *   Then, go to: current application > Deploy > __connect to github__
+    *   That's all here!
+
+    ```shell script
+    git push heroku master
+    heroku run python3 manage.py migrate
+    heroku run python3 manage.py createsuperuser
+    ```
+
+    *   Finally, Done! site's been deployed. check it [out](https://kibrary.herokuapp.com/)
+    
+        *   To check server logs.
+    
+            ```shell script
+            heroku log --tail
+            ```
+
+![img](ss.png)
