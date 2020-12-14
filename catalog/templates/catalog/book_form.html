@@ -1,0 +1,14 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+    <div class="card mt-5 p-3">
+      <h1>Update book's date</h1>
+      <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+{% endblock %}

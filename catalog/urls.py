@@ -9,4 +9,5 @@ urlpatterns = [
     path(r'book/<str:pk>/', views.BookDetailView.as_view(), name='detail'),
     path(r'mybooks/', views.LoanedBookByUser.as_view(), name='borrowed'),
     path('book/<uuid:pk>/renew/', views.renewBook, name='renew'),
+    path('book/<str:pk>/edit/', views.BookUpdateView.as_view(), name='update'),
 ]

@@ -30,6 +30,11 @@
             <th scope="col">Genre</th>
             <td>{{ book.genre.all|join:',' }}</td>
         </tr>
+        {% if perms.catalog.can_edit_book %}
+            <tr>
+                <a class="btn btn-primary" href="{% url 'catalog:update' book.pk %}">edit</a>
+            </tr>
+        {% endif %}
         </table>
     </div>
 

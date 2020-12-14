@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
+
 from .models import Book, BookInstance
 from .forms import RenewBookForm
 import datetime
@@ -44,15 +46,11 @@ class IndexView(LoginRequiredMixin, generic.ListView,):
         return Book.objects.all()[:3]
 
 
-
-
-
 class BookListView(LoginRequiredMixin, generic.ListView):
     login_url = 'login'
     model = Book
     template_name = 'catalog/books.html'
     context_object_name = 'books'
-
 
 
 class BookDetailView(LoginRequiredMixin, generic.DetailView):
@@ -96,6 +94,12 @@ def renewBook(request, pk):
 
     return render(request, 'catalog/book_renew.html', context)
 
+
+class BookUpdateView(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+    model = Book
+    login_url = 'login'
+    permission_required = ('can_edit_book',)
+    fields = '__all__'
 
 
 

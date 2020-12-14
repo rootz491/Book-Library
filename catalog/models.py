@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
-import uuid  # Required for unique book instances
 from django.contrib.auth.models import User
+import uuid  # Required for unique book instances
 from datetime import date
 
 # Create your models here.
@@ -57,6 +57,9 @@ class Book(models.Model):
         genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
 
         language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
+
+        class Meta:
+            permissions = (("can_edit_book", "edit book's data"),)
 
         def __str__(self):
                 return self.title
