@@ -1,5 +1,8 @@
-Python-3.8.5
 django
-django-s3-sqlite-0.0.3
-Pillow-8.0.1
-uuid
+django-s3-sqlite
+dj-database-url
+django-heroku
+gunicorn
+psycopg2
+python-decouple
+whitenoise
